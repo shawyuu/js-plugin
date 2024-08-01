@@ -79,13 +79,13 @@ ActionSheet.show({
 |PROP|TYPE|DEFAULT|REQUIRED|DESCRIPTION|
 |:-:|:-:|:-:|:-:|:-:|
 |title|`string`| `""` | `NO` |The title of the actionSheet.  |
-|size|`string|number`| `13` | `NO` |The fontSize of title.|
+|size|`string\|number`| `13` | `NO` |The fontSize of title.|
 |bold|`boolean`| `false` | `NO` | Determines if the fontSize of title is bold. |
 |grid|`boolean`| `false` | `NO` | Determines if the style of actionSheet is grid.)|
 |align|`string`| `center` | `NO` | The alignment method of item. When the grid is false,it takes effect,Possible values:`center`、`left`)|
-|itemList|`Array.<string|number|object>`| `[]` |`YES` | Items of the actionSheet. |
+|itemList|`Array.<string\|number\|object>`| `[]` |`YES` | Items of the actionSheet. |
 |itemColor|`string`| `#333` |`NO` | The text color of item, with lower priority than itemList(`Array.<object>`)|
-|itemSize|`string|number`| `17` | `NO` | The fontSize of item, When the grid is false,it takes effect. with lower priority than itemList(`Array.<object>`)|
+|itemSize|`string\|number`| `17` | `NO` | The fontSize of item, When the grid is false,it takes effect. with lower priority than itemList(`Array.<object>`)|
 |closeText|`string`| `取消` | `NO` | The close text of actionSheet.|
 |success|`function`| | `NO` |Callback function after clicking on a list item |
 |fail|`function`|  | `NO` |Callback function after clicking on cancel or mask |
