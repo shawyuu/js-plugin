@@ -1,0 +1,17 @@
+{
+  "name": "@shawyu/actionsheet",
+  "version": "1.0.3",
+  "description": "actionsheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "actionsheet",
+    "dialog",
+    "selection",
+    "picker"
+  ],
+  "author": "shawyu",
+  "license": "MIT"
+}

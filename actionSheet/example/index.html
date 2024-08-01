@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ActionSheet</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- <link rel="stylesheet" type="text/css" href="index.css" /> -->
+	</head>
+	<body>
+		<div>
+			<button onclick="handleClick()">显示 ActionSheet</button>
+		</div>
+		<script src="../index.js" type="text/javascript"></script>
+		<script>
+			function handleClick() {
+				ActionSheet.show({
+					title: 'This is ActionSheet Title！',
+					grid:true,
+					align:"center",
+					itemList: [
+						{ name: 'This is ActionSheet Item Name1', desc: 'This is ActionSheet Item Description',icon:"icon.png"},
+						{ name: 'This is ActionSheet Item Name2',icon:"icon.png"},
+						{ name: 'Name1'},
+						"Name2",
+						"Name3",
+						{ name: 'Name4',icon:"icon.png"}],
+					success: (res) => {
+						console.log(res.index)
+					},
+					fail: (err) => {
+						console.log(err.msg)
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

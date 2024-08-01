@@ -1,0 +1,15 @@
+{
+  "name": "@shawyu/tooltip",
+  "version": "1.0.4",
+  "description": "tooltip",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tooltip",
+    "popper"
+  ],
+  "author": "shawyu",
+  "license": "MIT"
+}
