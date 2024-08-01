@@ -83,7 +83,7 @@ ActionSheet.show({
 |属性|类型|默认值|必需|描述|
 |:-:|:-:|:-:|:-:|:-:|
 |title|`string`| `""` | `NO` |ActionSheet标题名称|
-|size|`string|number`| `13` | `NO` |标题的字体大小.|
+|size|`string\|number`| `13` | `NO` |标题的字体大小.|
 |bold|`boolean`| `false` | `NO` | 确定标题的字体大小是否为粗体. |
 |grid|`boolean`| `false` | `NO` | ActionSheet是否展示为网格样式.)|
 |align|`string`| `center` | `NO` | itemList的对齐方法。当网格为false时生效，可能的值：`center`、`left`）|
