@@ -87,9 +87,9 @@ ActionSheet.show({
 |bold|`boolean`| `false` | `NO` | 确定标题的字体大小是否为粗体. |
 |grid|`boolean`| `false` | `NO` | ActionSheet是否展示为网格样式.)|
 |align|`string`| `center` | `NO` | itemList的对齐方法。当网格为false时生效，可能的值：`center`、`left`）|
-|itemList|`Array.<string|number|object>`| `[]` |`YES` | ActionSheet项目`Array.<object> object{name:string,desc:string,color:string,size:string|number,icon:string}`. 当网格为false时 `desc`无效|
+|itemList|`Array.<string\|number\|object>`| `[]` |`YES` | ActionSheet项目`Array.<object> object{name:string,desc:string,color:string,size:string|number,icon:string}`. 当网格为false时 `desc`无效|
 |itemColor|`string`| `#333` |`NO` | 所有itemList文本标题(`name`)的字体颜色，优先级低于itemList（`Array.<object>`的`color`）|
-|itemSize|`string|number`| `17` | `NO` | 所有itemList文本标题(`name`)的字体大小，当网格为false时生效。优先级低于itemList（`Array.<object>`的`size`）|
+|itemSize|`string\|number`| `17` | `NO` | 所有itemList文本标题(`name`)的字体大小，当网格为false时生效。优先级低于itemList（`Array.<object>`的`size`）|
 |closeText|`string`| `取消` | `NO` | 取消文本 |
 |success|`function`| | `NO` |点击列表项后的回调函数 |
 |fail|`function`|  | `NO` |点击取消或遮罩后的回调函数 |
