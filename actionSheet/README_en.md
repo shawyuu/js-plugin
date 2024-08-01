@@ -8,6 +8,12 @@ en [English](README_en.md)
 
 ![Actionsheet](actionsheet.png)
 
+[Github](https://github.com/shawyuu/js-plugin/tree/main/actionSheet)
+
+```sh
+https://github.com/shawyuu/js-plugin/tree/main/actionSheet
+```
+
 ## Getting started
 
 ### Install
