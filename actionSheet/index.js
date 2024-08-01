@@ -1,5 +1,5 @@
 /**
- * ActionSheet 1.0.3
+ * ActionSheet 1.0.5
  * MIT License
  * 作者：shawyu
  * ＱＱ：758815944

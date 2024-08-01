@@ -1,6 +1,6 @@
 {
   "name": "@shawyu/actionsheet",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "actionsheet",
   "main": "index.js",
   "scripts": {
@@ -13,5 +13,9 @@
     "picker"
   ],
   "author": "shawyu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawyuu/js-plugin/tree/main/actionSheet"
+  },
   "license": "MIT"
 }
