@@ -1,5 +1,5 @@
 /**
- * ActionSheet 1.0.5
+ * ActionSheet 1.0.6
  * MIT License
  * 作者：shawyu
  * ＱＱ：758815944
@@ -93,7 +93,7 @@
 				let item = config.itemList[i];
 				let m_item = createEl('div');
 				m_item.className = "action-sheet-item";
-				if(typeof(item) ==='object' && typeof(item) !== null){
+				if(typeof(item) ==='object' && item !== null){
 					m_item.style.cssText = `display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;gap:8px;${config.align === 'center'?"justify-content: center;":"text-align:left;"};`;
 					m_item.innerHTML = `${item.icon?'<img style="height:28px;" src="'+ item.icon +'" alt="icon"/>':''}<div style="padding:4px 0;">
 						<div style="font-size: ${item.size?item.size:config.itemSize}px;line-height:24px;color:${item.color?item.color:config.itemColor}">${item.name}</div>
@@ -113,7 +113,7 @@
 			_el.className = "yu-action-sheet-grid";
 			for (let i = 0, len = config.itemList.length; i < len; i++) {
 				let dataItem = config.itemList[i];
-				let isObj = typeof(dataItem) ==='object' && typeof(dataItem) !== null;
+				let isObj = typeof(dataItem) ==='object' && dataItem !== null;
 				let item = isObj?dataItem:{name:dataItem};
 				let m_item = createEl('div');
 				m_item.className = "action-sheet-item";

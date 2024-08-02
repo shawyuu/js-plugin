@@ -1,6 +1,6 @@
 {
   "name": "@shawyu/toast",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "toast",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,10 @@
   "keywords": [
     "toast"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawyuu/js-plugin/tree/main/toast"
+  },
   "author": "shawyu",
   "license": "MIT"
 }

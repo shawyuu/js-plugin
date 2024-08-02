@@ -1,10 +1,10 @@
 /**
  * @license MIT
  * author shawyu
- * Toast version 1.0.0
+ * Toast version 1.0.1
+ * ＱＱ：758815944
  */
-;
-(function(global, factory) {
+;(function(global, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define([], factory());
 	} else if (typeof exports === 'object' && typeof module !== 'undefined') {
@@ -145,7 +145,7 @@
 		let mask = boolArr.includes(option.mask) ? option.mask : false;
 		let duration = option.duration && option.duration > 0 ? option.duration : 1000;
 		init();
-		if (typeof option === 'object' && option !== 'null') {
+		if (typeof option === 'object' && option != null) {
 			let config = {
 				title: option.title,
 				type: newType,
