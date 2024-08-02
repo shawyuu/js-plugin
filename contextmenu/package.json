@@ -1,0 +1,18 @@
+{
+  "name": "@shawyu/contextmenu",
+  "version": "1.0.0",
+  "description": "contextmenu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "contextmenu"
+  ],
+  "author": "shawyu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawyuu/js-plugin/tree/main/contextmenu"
+  },
+  "license": "MIT"
+}
