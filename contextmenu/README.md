@@ -2,10 +2,10 @@
 
 contextmenu.js 是一款轻量的`JavaScript`和`Node.js`插件。不依赖任何第三方库。专门用于Web应用中的右键菜单功能。ContextMenu不需要将其自身绑定到触发对象上，这使得它非常灵活，可以随时注入和删除触发器，而不必重新初始化或更新菜单。
 
-[Github地址](https://github.com/shawyuu/js-plugin/tree/main/actionSheet)
+[Github地址](https://github.com/shawyuu/js-plugin/tree/main/contextmenu)
 
 ```sh
-https://github.com/shawyuu/js-plugin/tree/main/actionSheet
+https://github.com/shawyuu/js-plugin/tree/main/contextmenu
 ```
 
 ## 开始使用
