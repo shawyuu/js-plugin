@@ -77,17 +77,17 @@ Toast.custom({
 
 ### All Props
 
-|PROP|TYPE|DEFAULT|REQUIRED|DESCRIPTION|
-|:-:|:-:|:-:|:-:|:-:|
-|title|`string`| `""` | `YES` |The title of the Toast.  |
-|type|`string`| `default` | `NO` |The type of Toast.Possible values:`default`,`primary`,`success`,`warning`,`error`,`info`,`loading`,`custom`|
-|placement|`string`| `center` | `NO` | Positions the toast relative to its reference element.Possible values:`top`,`center`,`bottom` |
-|bgColor|`string`| `rgba(0,0,0,0.75)` |`YES` | Background of the toast. when `showArrow` is `false`, it takes effect when the `type` is `loading` or `custom`.|
-|color|`string`| `#fff` |`NO` | The text color of toast. , it takes effect when the `type` is `loading` or `custom`|
-|duration|`string|number`| `1000` | `NO` | Delay duration for automatic shutdown. |
-|showClose|`boolean`| `false` | `NO` | Determines if the toast has an close btn(icon).it takes effect when the `type` is one of `primary,success,warning,error,info`|
-|mask|`boolean`| `false` | `NO` | Determine if the toast requires a mask. |
-|loadingStyle|`string`| `circle` | `NO` | when `type` is `loading`, it takes effect.Possible values:`circle`,`point`|
+|PROP|       TYPE       |DEFAULT|REQUIRED|DESCRIPTION|
+|:-:|:----------------:|:-:|:-:|:-:|
+|title|     `string`     | `""` | `YES` |The title of the Toast.  |
+|type|     `string`     | `default` | `NO` |The type of Toast.Possible values:`default`,`primary`,`success`,`warning`,`error`,`info`,`loading`,`custom`|
+|placement|     `string`     | `center` | `NO` | Positions the toast relative to its reference element.Possible values:`top`,`center`,`bottom` |
+|bgColor|     `string`     | `rgba(0,0,0,0.75)` |`YES` | Background of the toast. when `showArrow` is `false`, it takes effect when the `type` is `loading` or `custom`.|
+|color|     `string`     | `#fff` |`NO` | The text color of toast. , it takes effect when the `type` is `loading` or `custom`|
+|duration| `string\|number` | `1000` | `NO` | Delay duration for automatic shutdown. |
+|showClose|    `boolean`     | `false` | `NO` | Determines if the toast has an close btn(icon).it takes effect when the `type` is one of `primary,success,warning,error,info`|
+|mask|    `boolean`     | `false` | `NO` | Determine if the toast requires a mask. |
+|loadingStyle|     `string`     | `circle` | `NO` | when `type` is `loading`, it takes effect.Possible values:`circle`,`point`|
 
 ### Logs
 
