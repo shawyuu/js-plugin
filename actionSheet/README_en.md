@@ -106,10 +106,10 @@ ActionSheet.show({
 
 ### Logs
 
-> 1.0.2  Fix initialization duplicate styles
-> 
-> 1.0.3  Add grid、closeText and alignment method
 >
-> 1.0.5  Fix document problems
+> 1.0.2  Fix initialization duplicate styles\
+> 1.0.3  Add grid、closeText and alignment method\
+> 1.0.5  Fix document problems\
+> 1.0.6  Fix\
+> 1.0.7  Optimize\
 > 
-> 1.0.6  Fix

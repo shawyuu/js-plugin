@@ -1,6 +1,15 @@
 # @shawyu/tooltip
 
-tooltip.js is an lightweight bubble hint library for JavaScript and Node.js. 
+Tooltip plugins are a useful and widely-adopted feature in web development, especially in user interfaces (UI) where they provide additional information or context to elements on a page without cluttering the main content area. 
+
+Tooltip.js is an lightweight bubble hint library for JavaScript and Node.js. 
+
+
+[Github地址](https://github.com/shawyuu/js-plugin/tree/main/tooltip)
+
+```
+https://github.com/shawyuu/js-plugin/tree/main/tooltip
+```
 
 ## Getting started
 
@@ -12,7 +21,7 @@ npm install @shawyu/tooltip
 
 ### In browser
 
-```sh
+```
 <script src="../tooltip/index.js"></script>
 ```
 
@@ -99,4 +108,5 @@ Tooltip.show('#singleElement',{
 
 ### Logs
 
-> 1.0.4  Fix initialization duplicate styles
+> 1.0.4  Fix initialization duplicate styles\
+> 1.0.5  Fix and optimize

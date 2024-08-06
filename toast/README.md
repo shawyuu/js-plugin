@@ -2,6 +2,12 @@
 
 toast.js is a lightweight plugin for JavaScript and Node.js. 
 
+[Github地址](https://github.com/shawyuu/js-plugin/tree/main/toast)
+
+```
+https://github.com/shawyuu/js-plugin/tree/main/toast
+```
+
 ## Getting started
 
 ### Install
@@ -12,7 +18,7 @@ npm install @shawyu/toast
 
 ### In browser
 
-```sh
+```
 <script src="../toast/index.js"></script>
 ```
 
@@ -86,6 +92,7 @@ Toast.custom({
 ### Logs
 
 >
-> 1.0.0 version
-> 1.0.1 fix
+> 1.0.0 version\
+> 1.0.1 fix\
+> 1.0.2 optimize
 > 

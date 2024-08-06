@@ -1,7 +1,7 @@
 /**
  * @license MIT
  * author shawyu
- * Toast version 1.0.1
+ * Toast version 1.0.2
  * ＱＱ：758815944
  */
 ;(function(global, factory) {
@@ -21,7 +21,9 @@
 	const chooseEl = function(attr) { return document.querySelector(attr)};
 	const createEl = function(tag) { return document.createElement(tag) };
 	let timer = null;
-
+	
+	function Toast() {}
+	
 	function createNode(config) {
 		let _el_box = chooseElById(_m_box_name);
 		if (_el_box) return;
@@ -174,47 +176,33 @@
 			return createNode(config);
 		}
 	}
-	function primary(option) {
-		return showToast(option, 'primary')
-	}
-
-	function success(option) {
-		return showToast(option, 'success')
-	}
-
-	function warning(option) {
-		return showToast(option, 'warning')
-	}
-
-	function error(option) {
-		return showToast(option, 'error')
-	}
-
-	function info(option) {
-		return showToast(option, 'info')
+	
+	Toast.prototype = {
+		primary:(option)=> {
+			return showToast(option, 'primary')
+		},
+		success:(option)=> {
+			return showToast(option, 'success')
+		},
+		warning:(option)=> {
+			return showToast(option, 'warning')
+		},
+		error:(option)=> {
+			return showToast(option, 'error')
+		},
+		info:(option)=> {
+			return showToast(option, 'info')
+		},
+		loading:(option)=> {
+			return showToast(option, 'loading')
+		},
+		show:(option)=> {
+			return showToast(option, '')
+		},
+		hide:(option)=> {
+			return hideToast()
+		}
 	}
 	
-	function loading(option) {
-		return showToast(option, 'loading')
-	}
-	
-	function show(option) {
-		return showToast(option, '')
-	}
-	
-	function hide(option) {
-		return hideToast()
-	}
-	
-	const Toast = function() {
-		this.show = show;
-		this.primary = primary;
-		this.success = success;
-		this.warning = warning;
-		this.error = error;
-		this.info = info;
-		this.loading = loading;
-		this.hide = hide;
-	}
 	return new Toast();
 }));

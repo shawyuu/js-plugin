@@ -1,5 +1,5 @@
 /**
- * ActionSheet 1.0.6
+ * ActionSheet 1.0.7
  * MIT License
  * 作者：shawyu
  * ＱＱ：758815944
@@ -35,161 +35,166 @@
 	const chooseElById = function(id) { return document.getElementById(id) };
 	const chooseEl = function(attr) { return document.querySelector(attr) };
 	const createEl = function(tag) { return document.createElement(tag) };
-	const ActionSheet = function() {
-		const _this = this;
-		function createNode(config) {
-			_this.options = config;
-			let _el_box = chooseElById(_BOXNAME);
-			if(_el_box) return;
-			let fragmentEl = document.createDocumentFragment();
-			let _el_wrapper = createEl('div');
-			_el_wrapper.id = _BOXNAME;
-			_el_wrapper.className = _ANIMATION_IN;
-			
-			let _el_mask = createEl('div');
-			_el_mask.className = "yu-action-sheet-mask";
-			_el_mask.onclick = (e) => {
-				e.stopPropagation();
-				actionSheetClose();
-			}
-			_el_wrapper.appendChild(_el_mask);
-			
-			let _el = createEl('div');
-			_el.className = "yu-action-sheet";
-			_el.onclick = (e) => {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-			
-			if(config.title && !config.grid){
-				_el.appendChild(createTitle(config));
-			}
-			if(!config.grid){
-				if(config.itemList.length > 6){
-					console.error('ActionSheet:fail parameter error: when "grid" is false, itemList should not be large than 6')
-					return
-				}
-				_el.appendChild(createNormalItem(config));
-			}else{
-				_el.appendChild(createGridItem(config));
-			}
-			
-			let _el_close = createEl('div');
-			_el_close.className = "action-sheet-close";
-			_el_close.innerText = config.closeText;
-			_el_close.style.cssText = `position: relative;padding: 12px 16px;text-align: center;overflow: hidden;font-size: ${config.itemSize}px;border-top:10px solid #f5f5f5;line-height:32px;color:#333;`;
-			_el_close.onclick = handleItem(config.fail,{msg:'fail cancel'})
-			_el.appendChild(_el_close);
-			
-			_el_wrapper.appendChild(_el);
-			fragmentEl.appendChild(_el_wrapper);
-			document.body.appendChild(fragmentEl);
+	
+	function ActionSheet() {}
+	
+	function createNode(config) {
+		let _el_box = chooseElById(_BOXNAME);
+		if(_el_box) return;
+		let fragmentEl = document.createDocumentFragment();
+		let _el_wrapper = createEl('div');
+		_el_wrapper.id = _BOXNAME;
+		_el_wrapper.className = _ANIMATION_IN;
+		
+		let _el_mask = createEl('div');
+		_el_mask.className = "yu-action-sheet-mask";
+		_el_mask.onclick = (e) => {
+			e.stopPropagation();
+			actionSheetClose();
+		}
+		_el_wrapper.appendChild(_el_mask);
+		
+		let _el = createEl('div');
+		_el.className = "yu-action-sheet";
+		_el.onclick = (e) => {
+			e.stopPropagation();
+			e.preventDefault();
 		}
 		
-		function createNormalItem(config){
-			let _el = createEl('div');
-			_el.className = "yu-action-sheet-normal";
-			for (let i = 0, len = config.itemList.length; i < len; i++) {
-				let item = config.itemList[i];
-				let m_item = createEl('div');
-				m_item.className = "action-sheet-item";
-				if(typeof(item) ==='object' && item !== null){
-					m_item.style.cssText = `display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;gap:8px;${config.align === 'center'?"justify-content: center;":"text-align:left;"};`;
-					m_item.innerHTML = `${item.icon?'<img style="height:28px;" src="'+ item.icon +'" alt="icon"/>':''}<div style="padding:4px 0;">
-						<div style="font-size: ${item.size?item.size:config.itemSize}px;line-height:24px;color:${item.color?item.color:config.itemColor}">${item.name}</div>
-						${item.desc?'<div style="font-size: 14px;line-height:1.4;padding-top:4px;color:#999;">'+item.desc+'</div>':""}</div>`;
-					m_item.onclick = handleItem(config.success,{index:i})
-				}else if(typeof(item) ==='string' || typeof(item) === 'number'){
-					m_item.innerHTML = `<div style="padding:4px 0;line-height:24px;font-size: ${config.itemSize}px;color:${config.itemColor};text-align:${config.align}">${item}</div>`;
-					m_item.onclick = handleItem(config.success,{index:i})
-				}
-				_el.appendChild(m_item);
+		if(config.title && !config.grid){
+			_el.appendChild(createTitle(config));
+		}
+		if(!config.grid){
+			if(config.itemList.length > 6){
+				console.error('ActionSheet:fail parameter error: when "grid" is false, itemList should not be large than 6')
+				return
 			}
-			return _el
+			_el.appendChild(createNormalItem(config));
+		}else{
+			_el.appendChild(createGridItem(config));
 		}
 		
-		function createGridItem(config){
-			let _el = createEl('div');
-			_el.className = "yu-action-sheet-grid";
-			for (let i = 0, len = config.itemList.length; i < len; i++) {
-				let dataItem = config.itemList[i];
-				let isObj = typeof(dataItem) ==='object' && dataItem !== null;
-				let item = isObj?dataItem:{name:dataItem};
-				let m_item = createEl('div');
-				m_item.className = "action-sheet-item";
-				m_item.style.cssText = `display:block;width:25%;text-align:center;vertical-align: middle;`;
-				m_item.innerHTML = `<img style="height:36px;" src="${item.icon?item.icon:_DEFAULT_ICON}" alt="icon"/><div style="padding-top:10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: ${item.size?item.size:13}px;line-height:24px;color:${item.color?item.color:config.itemColor}">${item.name}</div>`;
+		let _el_close = createEl('div');
+		_el_close.className = "action-sheet-close";
+		_el_close.innerText = config.closeText;
+		_el_close.style.cssText = `position: relative;padding: 12px 16px;text-align: center;overflow: hidden;font-size: ${config.itemSize}px;border-top:10px solid #f5f5f5;line-height:32px;color:#333;`;
+		_el_close.onclick = handleItem(config.fail,{msg:'fail cancel'})
+		_el.appendChild(_el_close);
+		
+		_el_wrapper.appendChild(_el);
+		fragmentEl.appendChild(_el_wrapper);
+		document.body.appendChild(fragmentEl);
+	}
+	
+	function createNormalItem(config){
+		let _el = createEl('div');
+		_el.className = "yu-action-sheet-normal";
+		for (let i = 0, len = config.itemList.length; i < len; i++) {
+			let item = config.itemList[i];
+			let m_item = createEl('div');
+			m_item.className = "action-sheet-item";
+			if(typeof(item) ==='object' && item !== null){
+				m_item.style.cssText = `display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;gap:8px;${config.align === 'center'?"justify-content: center;":"text-align:left;"};`;
+				m_item.innerHTML = `${item.icon?'<img style="height:28px;" src="'+ item.icon +'" alt="icon"/>':''}<div style="padding:4px 0;">
+					<div style="font-size: ${item.size?item.size:config.itemSize}px;line-height:24px;color:${item.color?item.color:config.itemColor}">${item.name}</div>
+					${item.desc?'<div style="font-size: 14px;line-height:1.4;padding-top:4px;color:#999;">'+item.desc+'</div>':""}</div>`;
 				m_item.onclick = handleItem(config.success,{index:i})
-				_el.appendChild(m_item);
+			}else if(typeof(item) ==='string' || typeof(item) === 'number'){
+				m_item.innerHTML = `<div style="padding:4px 0;line-height:24px;font-size: ${config.itemSize}px;color:${config.itemColor};text-align:${config.align}">${item}</div>`;
+				m_item.onclick = handleItem(config.success,{index:i})
 			}
-			return _el
+			_el.appendChild(m_item);
 		}
-		
-		function handleItem(fn,info={}){
-			return function(e) {
-				e.stopPropagation();
-				e.preventDefault();
-				fn && fn(info)
-				actionSheetClose();
-			} 
+		return _el
+	}
+	
+	function createGridItem(config){
+		let _el = createEl('div');
+		_el.className = "yu-action-sheet-grid";
+		for (let i = 0, len = config.itemList.length; i < len; i++) {
+			let dataItem = config.itemList[i];
+			let isObj = typeof(dataItem) ==='object' && dataItem !== null;
+			let item = isObj?dataItem:{name:dataItem};
+			let m_item = createEl('div');
+			m_item.className = "action-sheet-item";
+			m_item.style.cssText = `display:block;width:25%;text-align:center;vertical-align: middle;`;
+			m_item.innerHTML = `<img style="height:36px;" src="${item.icon?item.icon:_DEFAULT_ICON}" alt="icon"/><div style="padding-top:10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: ${item.size?item.size:13}px;line-height:24px;color:${item.color?item.color:config.itemColor}">${item.name}</div>`;
+			m_item.onclick = handleItem(config.success,{index:i})
+			_el.appendChild(m_item);
 		}
+		return _el
+	}
+	
+	function handleItem(fn,info={}){
+		return function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			fn && fn(info)
+			actionSheetClose();
+		} 
+	}
+	
+	function createTitle(config){
+		let _el_title = createEl('div');
+		_el_title.className = "action-sheet-title";
+		_el_title.style.cssText = `font-size:${config.size}px;${config.bold?'font-weight:bolder;':''}`;
+		_el_title.innerHTML = `<p style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">${config.title}</p>`;
+		return _el_title
+	}
+	
+	function actionSheetClose() {
+		let _el = chooseElById(_BOXNAME);
+		if(!_el) return
+		_el.classList.remove(_ANIMATION_IN);
+		_el.classList.add(_ANIMATION_OUT);
+		_el.addEventListener('animationend', () => {
+			_el.remove();
+		});
+	}
+	
+	function initCss() {
+		let key = 'data-action-sheet-style';
+		let _style = chooseEl(`[${key}]`);
+		if (_style) return
+		let _style_el = createEl('style');
+		let _cssText = `.yu-action-sheet-mask{position:fixed;z-index:990;top:0;right:0;left:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5)}.yu-action-sheet{position:fixed;bottom:0;left:0;right:0;z-index:990;background-color:#fff;border-radius:15px 15px 0 0;overflow:hidden;user-select:none}.yu-action-sheet .action-sheet-title{position:relative;height:56px;line-height:16px;padding:10px 24px;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(0,0,0,0.55);text-align:center}.yu-action-sheet .action-sheet-title::after{position:absolute;z-index:3;right:0;bottom:0;left:0;height:1px;content:'';transform:scaleY(.5);background-color:#e6e6e6}.yu-action-sheet .yu-action-sheet-normal .action-sheet-item{position:relative;padding:12px 16px;box-sizing:border-box;overflow:hidden}.yu-action-sheet .yu-action-sheet-normal .action-sheet-item::after{position:absolute;z-index:3;right:15px;bottom:0;left:15px;height:1px;content:'';transform:scaleY(.5);background-color:#e6e6e6}.yu-action-sheet .yu-action-sheet-grid{display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;flex-wrap:wrap;padding-top:15px}.yu-action-sheet .yu-action-sheet-grid .action-sheet-item{position:relative;box-sizing:border-box;padding:15px 10px}.yu-action-sheet .action-sheet-item:active,.yu-action-sheet .action-sheet-close:active{background-color:#f0f0f0}.yu-action-sheet-in .yu-action-sheet-mask{animation:actionSheetFadeIn 0.1s}.yu-action-sheet-out .yu-action-sheet-mask{animation:actionSheetFadeOut 0.1s}.yu-action-sheet-in .yu-action-sheet{animation:actionSheetSlideUpApp 0.3s}.yu-action-sheet-out .yu-action-sheet{animation:actionSheetSlideDownApp 0.3s}@media screen and (min-width:768px){.yu-action-sheet{bottom:50%;left:50%;right:auto;border-radius:15px;width:360px;transform:translate(-50%,50%)}.yu-action-sheet .action-sheet-item,.yu-action-sheet .action-sheet-close{cursor:pointer}.yu-action-sheet-in .yu-action-sheet{animation:actionSheetSlideUp 0.3s}.yu-action-sheet-out .yu-action-sheet{animation:actionSheetSlideDown 0.3s}}@keyframes actionSheetFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes actionSheetFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes actionSheetSlideUpApp{0%{bottom:-50vw;opacity:0}100%{bottom:0;opacity:1}}@keyframes actionSheetSlideDownApp{0%{bottom:0;opacity:1}100%{bottom:-50vw;opacity:0}}@keyframes actionSheetSlideUp{0%{bottom:0;opacity:0}100%{bottom:50%;opacity:1}}@keyframes actionSheetSlideDown{0%{bottom:50%;opacity:1}100%{bottom:0;opacity:0}}`;
+		_style_el.type = 'text/css';
+		_style_el.setAttribute(key,true);
 		
-		function createTitle(config){
-			let _el_title = createEl('div');
-			_el_title.className = "action-sheet-title";
-			_el_title.style.cssText = `font-size:${config.size}px;${config.bold?'font-weight:bolder;':''}`;
-			_el_title.innerHTML = `<p style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">${config.title}</p>`;
-			return _el_title
+		if (_style_el.styleSheet) { //IE
+			_style_el.styleSheet.cssText = _cssText;
+		} else {  //w3c
+			let textNode = document.createTextNode(_cssText);
+			_style_el.appendChild(textNode);
 		}
-		
-		function actionSheetClose() {
-			let _el = chooseElById(_BOXNAME);
-			if(!_el) return
-			_el.classList.remove(_ANIMATION_IN);
-			_el.classList.add(_ANIMATION_OUT);
-			_el.addEventListener('animationend', () => {
-				_el.remove();
-			});
-		}
-		
-		function initCss() {
-			let key = 'data-action-sheet-style';
-			let _style = chooseEl(`[${key}]`);
-			if (_style) return
-			let _style_el = createEl('style');
-			let _cssText = `.yu-action-sheet-mask{position:fixed;z-index:990;top:0;right:0;left:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.5)}.yu-action-sheet{position:fixed;bottom:0;left:0;right:0;z-index:990;background-color:#fff;border-radius:15px 15px 0 0;overflow:hidden;user-select:none}.yu-action-sheet .action-sheet-title{position:relative;height:56px;line-height:16px;padding:10px 24px;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(0,0,0,0.55);text-align:center}.yu-action-sheet .action-sheet-title::after{position:absolute;z-index:3;right:0;bottom:0;left:0;height:1px;content:'';transform:scaleY(.5);background-color:#e6e6e6}.yu-action-sheet .yu-action-sheet-normal .action-sheet-item{position:relative;padding:12px 16px;box-sizing:border-box;overflow:hidden}.yu-action-sheet .yu-action-sheet-normal .action-sheet-item::after{position:absolute;z-index:3;right:15px;bottom:0;left:15px;height:1px;content:'';transform:scaleY(.5);background-color:#e6e6e6}.yu-action-sheet .yu-action-sheet-grid{display:-webkit-box;display:-webkit-flex;display:flex;align-items:center;flex-wrap:wrap;padding-top:15px}.yu-action-sheet .yu-action-sheet-grid .action-sheet-item{position:relative;box-sizing:border-box;padding:15px 10px}.yu-action-sheet .action-sheet-item:active,.yu-action-sheet .action-sheet-close:active{background-color:#f0f0f0}.yu-action-sheet-in .yu-action-sheet-mask{animation:actionSheetFadeIn 0.1s}.yu-action-sheet-out .yu-action-sheet-mask{animation:actionSheetFadeOut 0.1s}.yu-action-sheet-in .yu-action-sheet{animation:actionSheetSlideUpApp 0.3s}.yu-action-sheet-out .yu-action-sheet{animation:actionSheetSlideDownApp 0.3s}@media screen and (min-width:768px){.yu-action-sheet{bottom:50%;left:50%;right:auto;border-radius:15px;width:360px;transform:translate(-50%,50%)}.yu-action-sheet .action-sheet-item,.yu-action-sheet .action-sheet-close{cursor:pointer}.yu-action-sheet-in .yu-action-sheet{animation:actionSheetSlideUp 0.3s}.yu-action-sheet-out .yu-action-sheet{animation:actionSheetSlideDown 0.3s}}@keyframes actionSheetFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes actionSheetFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes actionSheetSlideUpApp{0%{bottom:-50vw;opacity:0}100%{bottom:0;opacity:1}}@keyframes actionSheetSlideDownApp{0%{bottom:0;opacity:1}100%{bottom:-50vw;opacity:0}}@keyframes actionSheetSlideUp{0%{bottom:0;opacity:0}100%{bottom:50%;opacity:1}}@keyframes actionSheetSlideDown{0%{bottom:50%;opacity:1}100%{bottom:0;opacity:0}}`;
-			_style_el.type = 'text/css';
-			_style_el.setAttribute(key,true);
-			
-			if (_style_el.styleSheet) { //IE
-				_style_el.styleSheet.cssText = _cssText;
-			} else {  //w3c
-				let textNode = document.createTextNode(_cssText);
-				_style_el.appendChild(textNode);
+		chooseEl('head').appendChild(_style_el);
+	}
+	
+	function _show(options){
+		let alignList = ["left","center"];
+		let boolList = [true,false];
+		if(typeof options === 'object' && typeof options !== null){
+			initCss(); //init css
+			let config = {
+				title:options.title || "",
+				size: options.size || 13,
+				bold: boolList.includes(options.bold)?options.bold:false,
+				grid: boolList.includes(options.grid)?options.grid:false,
+				align: alignList.includes(options.align)?options.align:"center",
+				itemList: options.itemList || [],
+				itemColor: options.itemColor || "#333",
+				itemSize: options.itemSize || 17,
+				closeText: options.closeText || '取消',
+				success: options.success || null,
+				fail: options.fail || null
 			}
-			chooseEl('head').appendChild(_style_el);
+			return createNode(config)
 		}
-		
-		this.show = function(options) {
-			let alignList = ["left","center"];
-			let boolList = [true,false];
-			if(typeof options === 'object' && typeof options !== null){
-				initCss(); //init css
-				let config = {
-					title:options.title || "",
-					size: options.size || 13,
-					bold: boolList.includes(options.bold)?options.bold:false,
-					grid: boolList.includes(options.grid)?options.grid:false,
-					align: alignList.includes(options.align)?options.align:"center",
-					itemList: options.itemList || [],
-					itemColor: options.itemColor || "#333",
-					itemSize: options.itemSize || 17,
-					closeText: options.closeText || '取消',
-					success: options.success || null,
-					fail: options.fail || null
-				}
-				return createNode(config)
-			}
+	}
+	
+	ActionSheet.prototype = {
+		show: (params) => {
+			return _show(params)
 		}
 	}
 	

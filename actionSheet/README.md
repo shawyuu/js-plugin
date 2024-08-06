@@ -11,7 +11,7 @@ en [English](README_en.md)
 
 [Github地址](https://github.com/shawyuu/js-plugin/tree/main/actionSheet)
 
-```sh
+```
 https://github.com/shawyuu/js-plugin/tree/main/actionSheet
 ```
 
@@ -25,7 +25,7 @@ npm install @shawyu/actionsheet
 
 ### 普通引入
 
-```sh
+```
 <script src="../actionsheet/index.js"></script>
 ```
 
@@ -110,10 +110,10 @@ ActionSheet.show({
 
 ### 版本日志
 
-> 1.0.2  修复初始化重复样式
-> 
-> 1.0.3  添加网格样式、取消文本配置和文本对齐方式
-> 
-> 1.0.5  修复文档问题
-> 
-> 1.0.6  修复已知问题
+>
+> 1.0.2  修复初始化重复样式\
+> 1.0.3  添加网格样式、取消文本配置和文本对齐方式\
+> 1.0.5  修复文档问题\
+> 1.0.6  修复已知问题\
+> 1.0.7  优化
+>

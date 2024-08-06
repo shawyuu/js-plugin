@@ -1,6 +1,6 @@
 {
   "name": "@shawyu/tooltip",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "tooltip",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,10 @@
     "tooltip",
     "popper"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawyuu/js-plugin/tree/main/tooltip"
+  },
   "author": "shawyu",
   "license": "MIT"
 }
