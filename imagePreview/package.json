@@ -1,7 +1,7 @@
 {
-  "name": "@shawyu/imagePreview",
+  "name": "@shawyu/image-preview",
   "version": "1.0.0",
-  "description": "imagePreview",
+  "description": "image-preview",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,8 @@
 	"img",
 	"imgPreview",
 	"imagePreview",
-    "preview"
+    "preview",
+	"image-preview"
   ],
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-# @shawyu/imagePreview
+# @shawyu/image-preview
 
 imagePreview是一个轻量级、无依赖的JavaScript插件，可以网页中实现图片预览功能，快速查看图片的大图，并提供了一些基本的交互功能，如放大、缩小、旋转等。
 
@@ -13,7 +13,7 @@ https://github.com/shawyuu/js-plugin/tree/main/imagePreview
 ### Install
 
 ```sh
-npm install @shawyu/imagePreview
+npm install @shawyu/image-preview
 ```
 
 ### In browser
@@ -25,7 +25,7 @@ npm install @shawyu/imagePreview
 ### Usage
 
 ```js
-import ImagePreview from '@shawyu/imagePreview'
+import ImagePreview from '@shawyu/image-preview'
 
 /*单图预览*/
 ImagePreview.show({
