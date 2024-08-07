@@ -7,10 +7,10 @@
  * 日历插件
  * Date 2024-07-24
  * options      {json}
- *  ├ src       {src}      图片链接
- *  ├ format    {string}   时间格式
- *  ├ view      {string}   默认视图
- *  ├ func      {function} 确认的回调函数
+ *  ├ src       {string}         图片路径
+ *  ├ urls      {Array<string>}  图片路径列表
+ *  ├ success      {string}      图片加载成功后的回调函数
+ *  ├ fail      {function}       图片加载失败后的回调函数
  */
 ;
 (function(global, factory) {
