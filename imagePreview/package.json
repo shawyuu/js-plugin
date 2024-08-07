@@ -1,0 +1,22 @@
+{
+  "name": "@shawyu/imagePreview",
+  "version": "1.0.0",
+  "description": "imagePreview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+	"image",
+	"img",
+	"imgPreview",
+	"imagePreview",
+    "preview"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shawyuu/js-plugin/tree/main/imagePreview"
+  },
+  "author": "shawyu",
+  "license": "MIT"
+}
