@@ -1,7 +1,7 @@
 /**
  * @license MIT
  * author shawyu
- * Toast version 1.0.2
+ * Toast version 1.0.4
  * ＱＱ：758815944
  */
 ;(function(global, factory) {
@@ -17,11 +17,12 @@
 	let _m_box_name = 'yu-toast-wrapper';
 	let _m_animation_in = 'yu-toast-in';
 	let _m_animation_out = 'yu-toast-out';
+	const cssKey = 'data-toast-style';
 	const chooseElById = function(id) { return document.getElementById(id) };
 	const chooseEl = function(attr) { return document.querySelector(attr)};
 	const createEl = function(tag) { return document.createElement(tag) };
 	let timer = null;
-	
+	let params = {};
 	function Toast() {}
 	
 	function createNode(config) {
@@ -29,7 +30,7 @@
 		if (_el_box) return;
 		clearTimeout(timer);
 		timer = null;
-
+		params = config;
 		let hasIcon = ['primary','success','warning','error','info'].includes(config.type);
 		let _el_wrapper = createEl('div');
 		_el_wrapper.id = _m_box_name;
@@ -40,7 +41,7 @@
 		_el_mask.style.cssText = `background:${config.mask?'rgba(0, 0, 0, 0.5)':'transparent'}`;
 		// _el_mask.addEventListener('click', (e) => {
 		// 	e.stopPropagation();
-		// 	hideToast();
+		// 	bindHideToast();
 		// });
 		_el_wrapper.appendChild(_el_mask);
 
@@ -64,37 +65,30 @@
 		} else if (config.type === "info") {
 			icon = `<svg class="icon" fill="${getColor(config.type)}" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 65.984C266.048 65.984 65.984 266.048 65.984 512S266.048 958.016 512 958.016 958.016 757.952 958.016 512 757.952 65.984 512 65.984zM544 736c0 17.696-14.304 32-32 32s-32-14.304-32-32l0-288c0-17.696 14.304-32 32-32s32 14.304 32 32L544 736zM512 352c-26.496 0-48-21.536-48-48C464 277.472 485.504 256 512 256s48 21.472 48 48C560 330.464 538.496 352 512 352z"></path></svg>`;
 			_el.style.cssText = `background:#f2f2f2;color:#333`;
-		} else if (config.type === "loading") {
-			icon = `<div class="loading-wrapper"><div class="loading-${config.loadingStyle}"></div></div>`;
-			_el.style.cssText = `background:${config.bgColor};color:${config.color}`;
 		} else if (config.type === "custom") {
 			_el.style.cssText = `background:${config.bgColor};color:${config.color}`;
 		}
 
-		_el.innerHTML = `${icon?'<div class="toast-hd">' + icon + '</div>':''}<div class="toast-bd">${config.title}</div>`;
-
-		if (config.showClose && hasIcon) {
+		_el.innerHTML = `${config.showIcon && icon?'<div class="toast-hd">' + icon + '</div>':''}<div class="toast-bd">${config.title}</div>`;
+		_el_wrapper.appendChild(_el);
+		document.body.appendChild(_el_wrapper);
+		if (config.showClose && hasIcon && config.placement !== 'center') {
 			const closeIcon = `<svg class="icon" fill="${config.type === 'info'?'#333':config.color}" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M571.733333 512l268.8-268.8c17.066667-17.066667 17.066667-42.666667 0-59.733333-17.066667-17.066667-42.666667-17.066667-59.733333 0L512 452.266667 243.2 183.466667c-17.066667-17.066667-42.666667-17.066667-59.733333 0-17.066667 17.066667-17.066667 42.666667 0 59.733333L452.266667 512 183.466667 780.8c-17.066667 17.066667-17.066667 42.666667 0 59.733333 8.533333 8.533333 19.2 12.8 29.866666 12.8s21.333333-4.266667 29.866667-12.8L512 571.733333l268.8 268.8c8.533333 8.533333 19.2 12.8 29.866667 12.8s21.333333-4.266667 29.866666-12.8c17.066667-17.066667 17.066667-42.666667 0-59.733333L571.733333 512z"></path></svg>`;
 			let _close_el = document.createElement('div');
 			_close_el.className = 'toast-ft';
 			_close_el.innerHTML = closeIcon;
 			_close_el.addEventListener('click', (e) => {
 				e.stopPropagation();
-				hideToast();
+				bindHideToast();
 			});
 			_el.appendChild(_close_el);
-		}
-
-		_el_wrapper.appendChild(_el);
-		document.body.appendChild(_el_wrapper);
-		
-		if (!config.showClose || (!hasIcon && config.type !== 'loading')) {
+		}else{
 			timer = setTimeout(() => {
-				hideToast()
+				bindHideToast()
 			}, config.duration);
 		}
 	}
-
+	
 	function getColor(type,alpha=1) {
 		if(type === 'primary'){
 			return `rgba(72, 116, 240, ${alpha})`
@@ -110,13 +104,12 @@
 	}
 
 	function init() {
-		let key = 'data-toast-style';
-		let _style = chooseEl(`[${key}]`);
+		let _style = chooseEl(`[${cssKey}]`);
 		if (_style) return
 		let _style_el = createEl('style');
 		let _cssText = `.yu-toast-wrapper .yu-toast-mask{position:fixed;z-index:990;top:0;right:0;left:0;bottom:0;width:100%;height:100%;background:transparent;}.yu-toast-wrapper .yu-toast{position:fixed;z-index:990;background:rgba(0,0,0,0.75);color:#fff;border-radius:15px 15px 0 0;overflow:hidden;user-select:none;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;align-items:center;gap:10px;border-radius:8px;padding:10px 15px;max-width:480px;min-width:140px;box-sizing:border-box;min-height:48px;}.yu-toast-wrapper .yu-toast-top{top:4vw;left:50%;width:92vw;transform:translate(-50%,0);}.yu-toast-wrapper .yu-toast-center{top:50%;left:50%;transform:translate(-50%,-50%);flex-direction:column;gap:5px;}.yu-toast-wrapper .yu-toast-bottom{bottom:4vw;width:92vw;left:50%;transform:translate(-50%,0);}.yu-toast-wrapper .yu-toast .toast-hd{font-size:0;line-height:0;}.yu-toast-wrapper .yu-toast .toast-hd .icon{width:20px;height:20px;}.yu-toast-wrapper .yu-toast-center .toast-hd .icon{width:40px;height:40px;}.yu-toast-wrapper .yu-toast .toast-bd{-webkit-flex:1;-ms-flex:1;-webkit-box-flex:1;-moz-box-flex:1;flex:1;line-height:1.4;font-size:14px;word-break:break-all;}.yu-toast-wrapper .yu-toast .toast-ft{font-size:0;line-height:0;padding:8px;}.yu-toast-wrapper .yu-toast .toast-ft .icon{width:20px;height:20px;}.yu-toast-wrapper .yu-toast-center .toast-hd{padding:5px 0;}.yu-toast-wrapper .yu-toast-center .toast-bd{padding:5px 0;}.yu-toast-wrapper .yu-toast-center .toast-ft{margin:0;}.yu-toast-wrapper .yu-toast-top .toast-ft,.yu-toast-wrapper .yu-toast-bottom .toast-ft{margin:-4px -8px -4px 0;}.yu-toast-wrapper.yu-toast-in .yu-toast-mask{animation:toastFadeIn 0.2s;}.yu-toast-wrapper.yu-toast-out .yu-toast-mask{animation:toastFadeOut 0.2s;}.yu-toast-wrapper.yu-toast-in .yu-toast-top{animation:toastTopSlideDown 0.3s ease-out;}.yu-toast-wrapper.yu-toast-out .yu-toast-top{animation:toastTopSlideUp 0.3s ease-out;}.yu-toast-wrapper.yu-toast-in .yu-toast-center{animation:toastCenterSlideDown 0.3s ease-out;}.yu-toast-wrapper.yu-toast-out .yu-toast-center{animation:toastCenterSlideUp 0.3s ease-out;}.yu-toast-wrapper.yu-toast-in .yu-toast-bottom{animation:toastSlideUp 0.3s ease-out;}.yu-toast-wrapper.yu-toast-out .yu-toast-bottom{animation:toastSlideDown 0.3s ease-out;}.yu-toast-wrapper .yu-toast .toast-hd .loading-wrapper{padding:8px;}.yu-toast-wrapper .yu-toast .toast-hd .loading-circle{width:30px;aspect-ratio:1;border-radius:50%;background:radial-gradient(farthest-side,#fff 94%,#0000) top/4px 4px no-repeat,conic-gradient(#0000 30%,#fff);-webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 4px),#000 0);animation:toastLoadingCircleRotate 1s infinite linear;}.yu-toast-wrapper .yu-toast .toast-hd .loading-point{width:36px;aspect-ratio:1;--_bg:no-repeat radial-gradient(farthest-side,#fff 92%,#0000);background:var(--_bg) top,var(--_bg) left,var(--_bg) right,var(--_bg) bottom;background-size:8px 8px;animation:toastLoadingPointRotate 0.75s infinite;}.yu-toast-wrapper .yu-toast-top .toast-hd .loading-wrapper,.yu-toast-wrapper .yu-toast-bottom .toast-hd .loading-wrapper{padding:2px;}.yu-toast-wrapper .yu-toast-top .toast-hd .loading-circle,.yu-toast-wrapper .yu-toast-bottom .toast-hd .loading-circle{width:24px;}.yu-toast-wrapper .yu-toast-top .toast-hd .loading-point,.yu-toast-wrapper .yu-toast-bottom .toast-hd .loading-point{width:24px;background-size:4px 4px;}@media screen and (min-width:768px){.yu-toast-wrapper .yu-toast-top{top:15px;width:auto;}.yu-toast-wrapper .yu-toast-bottom{bottom:15px;width:auto;}.yu-toast-wrapper .yu-toast .toast-ft{padding:4px;}}@keyframes toastLoadingCircleRotate{to{transform:rotate(1turn)}}@keyframes toastLoadingPointRotate{to{transform:rotate(.5turn)}}@keyframes toastFadeIn{0%{opacity:0;}100%{opacity:1;}}@keyframes toastFadeOut{0%{opacity:1;}100%{opacity:0;}}@keyframes toastTopSlideDown{0%{opacity:0;transform:translate(-50%,-50%);}100%{opacity:1;transform:translate(-50%,0);}}@keyframes toastTopSlideUp{0%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-50%);}}@keyframes toastCenterSlideDown{0%{opacity:0;transform:translate(-50%,-100%);}100%{opacity:1;transform:translate(-50%,-50%);}}@keyframes toastCenterSlideUp{0%{opacity:1;transform:translate(-50%,-50%);}100%{opacity:0;transform:translate(-50%,-100%);}}@keyframes toastSlideUp{0%{opacity:0;transform:translate(-50%,50%);}100%{opacity:1;transform:translate(-50%,0);}}@keyframes toastSlideDown{0%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,50%);}}`;
 		_style_el.type = 'text/css';
-		_style_el.setAttribute(key,true);
+		_style_el.setAttribute(cssKey,true);
 		
 		if (_style_el.styleSheet) { //IE
 			_style_el.styleSheet.cssText = _cssText;
@@ -127,38 +120,41 @@
 		chooseEl('head').appendChild(_style_el);
 	}
 
-	function hideToast() {
+	function bindHideToast() {
 		let _el = chooseElById(_m_box_name);
 		if (!_el) return
 		_el.classList.remove(_m_animation_in);
 		_el.classList.add(_m_animation_out);
 		_el.addEventListener('animationend', () => {
-			_el.remove();
+			_el.remove()
+			let _style_el = chooseEl(`[${cssKey}]`);
+			_style_el.remove();
+			params.onClose && params.onClose()
 		});
 	}
-
+	
 	function showToast(option, type) {
-		let boolArr = [true, false];
-		let typeList = ['default','primary','success','warning','error','info','loading','custom'];
-		let loadingStyleList = ['circle','point'];
-		let newType = type ? type : typeList.includes(option.type) ? option.type : 'default';
-		let loadingStyle = loadingStyleList.includes(option.loadingStyle) ? option.loadingStyle : 'circle';
-		let showClose = boolArr.includes(option.showClose) ? option.showClose : false;
-		let mask = boolArr.includes(option.mask) ? option.mask : false;
-		let duration = option.duration && option.duration > 0 ? option.duration : 1000;
 		init();
 		if (typeof option === 'object' && option != null) {
+			let boolArr = [true, false];
+			let typeList = ['default','primary','success','warning','error','info','custom'];
+			let newType = type ? type : typeList.includes(option.type) ? option.type : 'default';
+			let showClose = boolArr.includes(option.showClose) ? option.showClose : false;
+			let showIcon = boolArr.includes(option.showIcon) ? option.showIcon : true;
+			let mask = boolArr.includes(option.mask) ? option.mask : false;
+			let duration = option.duration && option.duration > 0 ? option.duration : 1000;
+			let placement = ['top','center','bottom'].includes(option.placement) ? option.placement : 'center';
 			let config = {
 				title: option.title,
 				type: newType,
-				placement: option.placement || 'center',
+				placement,
 				bgColor: option.bgColor || 'rgba(0,0,0,0.75)',
 				color: option.color || '#fff',
 				duration,
 				showClose,
+				showIcon,
 				mask,
-				loadingStyle,
-				fail: option.fail
+				onClose: option.onClose || null
 			};
 			return createNode(config);
 		} else if (typeof option === 'string') {
@@ -168,12 +164,87 @@
 				placement: 'center',
 				bgColor: 'rgba(0,0,0,0.75)',
 				color: '#fff',
-				duration,
-				showClose,
-				mask,
-				loadingStyle
+				duration:1000,
+				showClose:false,
+				showIcon:true,
+				mask:false
 			}
 			return createNode(config);
+		}
+	}
+	
+	function createLoadingNode(config) {
+		let _el_box = chooseElById(_m_box_name);
+		if (_el_box) return;
+		let _el_wrapper = createEl('div');
+		_el_wrapper.id = _m_box_name;
+		_el_wrapper.className = _m_box_name + ' ' + _m_box_name + '-loading ' + _m_animation_in;
+		
+		let _el_mask = createEl('div');
+		_el_mask.className = "yu-toast-mask";
+		_el_mask.style.cssText = `background:${config.mask?'rgba(0, 0, 0, 0.2)':'transparent'}`;
+		_el_wrapper.appendChild(_el_mask);
+		
+		let _el = createEl('div');
+		_el.className = "yu-toast" + " yu-toast-" + config.placement + ' yu-toast-loading';
+		_el.style.cssText = `background:${config.bgColor};color:${config.color}`;
+		_el.innerHTML = `<div class="toast-hd"><div class="loading-wrapper"><div class="loading-${config.loadingStyle}"></div></div></div><div class="toast-bd">${config.title}</div>`;
+		
+		_el_wrapper.appendChild(_el);
+		document.body.appendChild(_el_wrapper);
+	}
+	
+	function showLoading(option) {
+		init();
+		if (typeof option === 'object' && option != null) {
+			let loadingStyle = ['circle','point'].includes(option.loadingStyle) ? option.loadingStyle : 'circle';
+			let mask = [true, false].includes(option.mask) ? option.mask : false;
+			let placement = ['top','center','bottom'].includes(option.placement) ? option.placement : 'center';
+			let config = {
+				title: option.title,
+				placement,
+				bgColor: option.bgColor || 'rgba(0,0,0,0.75)',
+				color: option.color || '#fff',
+				mask,
+				loadingStyle
+			};
+			return createLoadingNode(config);
+		} else if (typeof option === 'string') {
+			let config = {
+				title: option,
+				placement: 'center',
+				bgColor: 'rgba(0,0,0,0.75)',
+				color: '#fff',
+				mask:false,
+				loadingStyle: 'circle'
+			}
+			return createLoadingNode(config);
+		}
+	}
+	
+	function bindHideLoading(option={}) {
+		let _el = chooseEl(`.${_m_box_name}-loading`);
+		if (!_el) return
+		if (typeof option !== 'object' || option === null){
+			console.error(`Toast:fail parameter error: hideLoading() expected an <object> param, but get <${typeof option}>`)
+			return
+		}
+		let delay = option.delay || 500;
+		try{
+			_el.classList.remove(_m_animation_in);
+			_el.classList.add(_m_animation_out);
+			_el.addEventListener('animationend', () => {
+				_el.remove()
+				let _style_el = chooseEl(`[${cssKey}]`);
+				_style_el.remove();
+				setTimeout(()=>{
+					option.success && option.success()
+				},delay)
+			});
+		}catch(err){
+			setTimeout(()=>{
+				option.fail && option.fail()
+			},delay)
 		}
 	}
 	
@@ -193,14 +264,17 @@
 		info:(option)=> {
 			return showToast(option, 'info')
 		},
-		loading:(option)=> {
-			return showToast(option, 'loading')
-		},
 		show:(option)=> {
 			return showToast(option, '')
 		},
-		hide:(option)=> {
-			return hideToast()
+		hide:()=> {
+			return bindHideToast()
+		},
+		loading:(option)=> {
+			return showLoading(option)
+		},
+		hideLoading:(option)=> {
+			return bindHideLoading(option)
 		}
 	}
 	

@@ -30,17 +30,17 @@
 					title:'加载中...',
 					showClose:true,
 					// loadingStyle:"point",
-					placement:"top"
+					placement:"center"
 				})
-				setTimeout(()=>{
-					Toast.hide()
-				},1000)
+				// setTimeout(()=>{
+				// 	Toast.hide()
+				// },1000)
 			}
 			function handleClick1() {
 				Toast.show({
 					title:'这是一段提示',
 					showClose:true,
-					type:'info',
+					type:'default',
 					placement:"center"
 				})
 			}
@@ -72,7 +72,10 @@
 				})
 			}
 			function handleClick5() {
-				Toast.success('这是一段提示')
+				Toast.loading('加载中')
+				setTimeout(()=>{
+					Toast.hideLoading(11)
+				},1000)
 			}
 		</script>
 	</body>
