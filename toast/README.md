@@ -120,4 +120,5 @@ setTimeout(()=>{
 > 1.0.3 add showIcon and onClose(callback)\
 >       add hideLoading（when use Toast.loading，you must use Toast.hideLoading to close it）\
 > 1.0.4 fix parameter error\
+> 1.0.5 Cancel loading animation
 >  

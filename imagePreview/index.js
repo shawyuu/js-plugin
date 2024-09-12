@@ -1,11 +1,11 @@
 /**
- * imagePreview v1.0.0
+ * imagePreview v1.0.2
  * MIT License
  * 作者：shaw
  * ＱＱ：758815944
  * -------------------------------------------------------------
- * 日历插件
- * Date 2024-07-24
+ * 图片预览插件
+ * Date 2024-09-12
  * options      {json}
  *  ├ src       {string}         图片路径
  *  ├ urls      {Array<string>}  图片路径列表
@@ -167,8 +167,8 @@
 			let item_el = createEl('img');
 			item_el.src = toolbar[i].src;
 			item_el.title = toolbar[i].title;
-			item_el.className = `toolbar-${toolbar[i].type}`;
-			item_el.style.cssText = `width:24px;height:24px;margin:0 10px;cursor:pointer;`;
+			item_el.className = `toolbar-${toolbar[i].type} toolbar-icon`;
+			item_el.style.cssText = `width:24px;height:24px;max-width: none;`;
 			if(i === 2){
 				item_el.classList.add('toolbar-mid');
 			}
@@ -203,18 +203,16 @@
 		let idx = params.urls.findIndex(value => value === params.src);
 		idx = idx < 0 ? 0:idx;
 		let arrow_l = createEl('div');
-		arrow_l.className = "img-arrow";
+		arrow_l.className = "img-arrow img-arrow-left";
 		arrow_l.innerHTML = arrowLeft;
-		arrow_l.style.left = `40px`;
 		arrow_l.onclick = (e)=>{
 			bindStopPropagation(e)
 			idx = idx <= 0 ? (len - 1):(idx - 1);
 			switchImage(idx)
 		};
 		let arrow_r = createEl('div');
-		arrow_r.className = "img-arrow";
+		arrow_r.className = "img-arrow img-arrow-right";
 		arrow_r.innerHTML = arrowRight;
-		arrow_r.style.right = `50px`;
 		arrow_r.onclick = (e)=>{
 			bindStopPropagation(e)
 			idx = idx >= len - 1 ? 0:(idx + 1);
@@ -293,11 +291,10 @@
 	}
 	
 	function initCss() {
-		let cssKey = 'data-image-preview-style';
 		let _style = chooseEl(`[${cssKey}]`);
 		if (_style) return
 		let _style_el = createEl('style');
-		let _cssText = `.yu-image-preview-wrapper {position: fixed;top: 0;bottom: 0;left: 0;right: 0;z-index: 2000;background-color: rgba(0, 0, 0, 0.4);display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;align-items: center;justify-content: center;overflow: hidden;transition: all 0.3s ease-in-out;user-select: none;}.yu-image-preview-wrapper .img-arrow {position: fixed;top: 50%;transform: translateY(-50%);background: rgba(0, 0, 0, 0.2);width: 54px;height: 54px;border-radius: 100px;display: flex;align-items: center;justify-content: center;cursor: pointer;opacity: 0.4;transition: all 0.3s ease;}.yu-image-preview-wrapper .img-arrow .icon {fill: #fff;}.yu-image-preview-wrapper .img-arrow:hover{opacity: 1;}.img-toolbar-wrapper {position: fixed;bottom: 40px;left: 50%;z-index: 1;transform: translateX(-50%);font-size: 0;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;align-items: center;background-color: rgba(0, 0, 0, 0.5);padding: 15px;border-radius: 30px;}`;
+		let _cssText = `.yu-image-preview-wrapper{position:fixed;top:0;bottom:0;left:0;right:0;z-index:2000;background-color:rgba(0,0,0,0.4);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all 0.3s ease-in-out;user-select:none}.yu-image-preview-wrapper.img-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.2);width:54px;height:54px;border-radius:100px;display:flex;align-items:center;justify-content:center;opacity:0.4;transition:all 0.3s ease}.yu-image-preview-wrapper.img-arrow.icon{fill:#fff}@media screen and(min-width:768px){.yu-image-preview-wrapper.img-arrow{cursor:pointer}.yu-image-preview-wrapper.img-arrow-left{left:40px}.yu-image-preview-wrapper.img-arrow-right{right:40px}.yu-image-preview-wrapper.img-arrow:hover{opacity:1}.yu-image-preview-wrapper.img-toolbar-wrapper{position:fixed;bottom:40px;left:50%;z-index:1;transform:translateX(-50%);font-size:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;align-items:center;background-color:rgba(0,0,0,0.5);padding:15px;border-radius:30px}.yu-image-preview-wrapper.img-toolbar-wrapper.toolbar-icon{margin:0 10px}}@media screen and(max-width:768px){.yu-image-preview-wrapper.img-arrow{width:48px;height:48px}.yu-image-preview-wrapper.img-arrow-left{left:15px}.yu-image-preview-wrapper.img-arrow-right{right:15px}.yu-image-preview-wrapper.img-arrow:active{opacity:1}.yu-image-preview-wrapper.img-toolbar-wrapper{position:fixed;bottom:10px;left:10px;right:10px;z-index:1;font-size:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;align-items:center;justify-content:space-around;background-color:rgba(0,0,0,0.5);padding:8px 10px;border-radius:10px}.yu-image-preview-wrapper.img-toolbar-wrapper.toolbar-icon{padding:10px}}`;
 		_style_el.type = 'text/css';
 		_style_el.setAttribute(cssKey,true);
 		if (_style_el.styleSheet) { //IE

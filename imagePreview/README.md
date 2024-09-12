@@ -57,5 +57,6 @@ ImagePreview.show({
 ### Logs
 
 >
-> 1.0.0 version
+> 1.0.0 version\
+> 1.0.2 Adapt to mobile devices
 > 

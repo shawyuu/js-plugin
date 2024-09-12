@@ -28,7 +28,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	cursor: pointer;
 	opacity: 0.4;
 	transition: all 0.3s ease;
 }
@@ -36,30 +35,74 @@
 .yu-image-preview-wrapper .img-arrow .icon {
 	fill: #fff;
 }
-.yu-image-preview-wrapper .img-arrow:hover{
-	opacity: 1;
-}
-.img-toolbar-wrapper {
-	position: fixed;
-	bottom: 40px;
-	left: 50%;
-	z-index: 1;
-	transform: translateX(-50%);
-	font-size: 0;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	align-items: center;
-	background-color: rgba(0, 0, 0, 0.5);
-	padding: 15px;
-	border-radius: 30px;
+@media screen and (min-width: 768px) {
+	.yu-image-preview-wrapper .img-arrow {
+		cursor: pointer;
+	}
+	.yu-image-preview-wrapper .img-arrow-left {
+		left: 40px;
+	}
+	.yu-image-preview-wrapper .img-arrow-right {
+		right: 40px;
+	}
+	.yu-image-preview-wrapper .img-arrow:hover {
+		opacity: 1;
+	}
+	
+	.yu-image-preview-wrapper .img-toolbar-wrapper {
+		position: fixed;
+		bottom: 40px;
+		left: 50%;
+		z-index: 1;
+		transform: translateX(-50%);
+		font-size: 0;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 15px;
+		border-radius: 30px;
+	}
+	.yu-image-preview-wrapper .img-toolbar-wrapper .toolbar-icon{
+		margin:0 10px;
+	}
 }
 
-.img-toolbar-wrapper .toolbar-fit{
+@media screen and (max-width: 768px) {
+	.yu-image-preview-wrapper .img-arrow {
+		width: 48px;
+		height: 48px;
+	}
+	.yu-image-preview-wrapper .img-arrow-left {
+		left: 15px;
+	}
+	.yu-image-preview-wrapper .img-arrow-right {
+		right: 15px;
+	}
+	.yu-image-preview-wrapper .img-arrow:active {
+		opacity: 1;
+	}
 	
-}
-
-.img-toolbar-wrapper .toolbar-normal{
-	
+	.yu-image-preview-wrapper .img-toolbar-wrapper {
+		position: fixed;
+		bottom: 10px;
+		left: 10px;
+		right: 10px;
+		z-index: 1;
+		font-size: 0;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 8px 10px;
+		border-radius: 10px;
+	}
+	.yu-image-preview-wrapper .img-toolbar-wrapper .toolbar-icon{
+		padding: 10px;
+	}
 }

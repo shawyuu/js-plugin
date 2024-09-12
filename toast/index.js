@@ -1,7 +1,7 @@
 /**
  * @license MIT
  * author shawyu
- * Toast version 1.0.4
+ * Toast version 1.0.5
  * ＱＱ：758815944
  */
 ;(function(global, factory) {
@@ -178,7 +178,7 @@
 		if (_el_box) return;
 		let _el_wrapper = createEl('div');
 		_el_wrapper.id = _m_box_name;
-		_el_wrapper.className = _m_box_name + ' ' + _m_box_name + '-loading ' + _m_animation_in;
+		_el_wrapper.className = _m_box_name + ' ' + _m_box_name + '-loading';
 		
 		let _el_mask = createEl('div');
 		_el_mask.className = "yu-toast-mask";
@@ -231,16 +231,12 @@
 		}
 		let delay = option.delay || 500;
 		try{
-			_el.classList.remove(_m_animation_in);
-			_el.classList.add(_m_animation_out);
-			_el.addEventListener('animationend', () => {
-				_el.remove()
-				let _style_el = chooseEl(`[${cssKey}]`);
-				_style_el.remove();
-				setTimeout(()=>{
-					option.success && option.success()
-				},delay)
-			});
+			_el.remove()
+			let _style_el = chooseEl(`[${cssKey}]`);
+			_style_el.remove();
+			setTimeout(()=>{
+				option.success && option.success()
+			},delay)
 		}catch(err){
 			setTimeout(()=>{
 				option.fail && option.fail()
