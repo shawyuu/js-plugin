@@ -43,8 +43,8 @@ Contextmenu.init({
 ### 使用二
 ```vue
 <div>
-  <div oncontextmenu="handle(window.event)">菜单一</div>
-  <div oncontextmenu="handle(window.event)">菜单二</div>
+    <div oncontextmenu="handle(window.event)">菜单一</div>
+    <div oncontextmenu="handle(window.event)">菜单二</div>
 </div>
 ```
 ```js
