@@ -1,6 +1,6 @@
 {
 	"name": "@shawyu/toast",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "toast",
 	"main": "./dist/index.umd.cjs",
 	"module": "./dist/index.js",

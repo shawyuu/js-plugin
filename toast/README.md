@@ -82,6 +82,9 @@ Toast.loading({
 	mask:false,
 	loadingStyle: 'circle'
 })
+
+Toast.setText('loading 90%')
+
 setTimeout(()=>{
 	Toast.hideLoading({
 		delay:1000,  // delay to run callback, default value:500
@@ -121,4 +124,5 @@ setTimeout(()=>{
 >       add hideLoading（when use Toast.loading，you must use Toast.hideLoading to close it）\
 > 1.0.4 fix parameter error\
 > 1.0.5 Cancel loading animation
+> 1.0.9 add setText()
 >  

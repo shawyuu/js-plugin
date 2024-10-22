@@ -183,6 +183,11 @@ function createLoadingNode(config) {
     document.body.appendChild(_el_wrapper);
 }
 
+function setLoadingText(text){
+	let _el = chooseEl(`.${_m_box_name}-loading .toast-bd`);
+	_el.innerText = text;
+}
+
 function showLoading(option) {
     init();
     if (typeof option === 'object' && option != null) {
@@ -263,5 +268,8 @@ export default {
     },
     hideLoading: (option) => {
         return bindHideLoading(option)
-    }
+    },
+	setText: (text) => {
+	    return setLoadingText(text)
+	},
 }

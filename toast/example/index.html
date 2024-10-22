@@ -14,9 +14,14 @@
 			<button onclick="handleClick3()">点击2</button>
 			<button onclick="handleClick4()">点击2</button>
 			<button onclick="handleClick5()">点击2</button>
+			<button onclick="handleClick6()">设置进度</button>
 		</div>
 		<script src="../dist/index.umd.cjs" type="text/javascript" charset="utf-8"></script>
 		<script>
+			function handleClick6() {
+				console.log(window)
+				Toast.setText('正在进行中...')
+			}
 			function handleClick() {
 				// Toast.show({
 				// 	title:'Loading...',
@@ -25,7 +30,6 @@
 				// 	loadingStyle:"point",
 				// 	placement:"center"
 				// })
-				
 				Toast.loading({
 					title:'加载中...',
 					showClose:true,
