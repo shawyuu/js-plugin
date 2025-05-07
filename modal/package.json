@@ -1,6 +1,6 @@
 {
 	"name": "@shawyu/modal",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "modal",
 	"main": "./dist/index.umd.cjs",
 	"module": "./dist/index.js",
