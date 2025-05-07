@@ -47,11 +47,11 @@ Modal.show({
 |content|     `string`     | `` | `YES` |提示的内容，可以是普通字符串，也可以是HTML字符串 |
 |showCancel|     `boolean`     | `true` | `NO` | 是否显示取消按钮 |
 |cancelText|     `string`     | `取消` |`NO` | 取消按钮的文字 |
-|cancelColor|     `string`     | `#f5f6f7` |`NO` | 取消按钮的文字颜色，显示颜色的字符串|
+|cancelColor|     `string`     | `#f5f6f7` |`NO` | 取消按钮的背景颜色，显示颜色的字符串|
 |showConfirm|     `boolean`     | `true` | `NO` | 是否显示确认按钮 |
 |confirmText|     `string`     | `确定` |`NO` | 确认按钮的文字 |
-|confirmColor|     `string`     | `#3565ee` |`NO` | 确认按钮的文字颜色，显示颜色的字符串 |
-|maskColor|     `string`     | `rgba(0,0,0,0.5)` |`NO` | 确认按钮的文字颜色，显示颜色的字符串 |
+|confirmColor|     `string`     | `#3565ee` |`NO` | 确认按钮的背景颜色，显示颜色的字符串 |
+|maskColor|     `string`     | `rgba(0,0,0,0.5)` |`NO` | 遮罩的背景颜色，显示颜色的字符串 |
 |maskClosable|     `boolean`     | `true` | `NO` | 是否可以点击遮罩关闭提示 |
 |cancel|  `function`     | `null` | `NO` | 点击取消的回调函数 |
 |confirm|  `function`     | `null` | `NO` | 点击确认的回调函数 |
